@@ -3,6 +3,8 @@
     --sec : #381c0a;
     --ter1 : #FEBA17;
     --ter2 : #74512D;
+    --red : red;
+    --green : green;
 }
 
 @font-face {
@@ -59,7 +61,7 @@ section.allElems{
 }
 
 .elem{
-    background-color: #FEBA17;
+    background-color: var(--ter1);
     height: 400px;
     width: 330px;
     border-radius: 10px;
@@ -91,8 +93,8 @@ section.allElems{
 .fullElem{
     height: 100%;
     width: 100%;
-    background-color: #381c0a;
-    display: none;
+    background-color: var(--sec);
+    display: block;
     position: absolute;
 }
 
@@ -102,14 +104,172 @@ section.allElems{
     font-weight: 500;
     padding: 8px 16px;
     color: white;
-    background-color: red;
+    background-color: var(--red);
     border: none;
     border-radius: 5px;
     position: absolute;
     right: 5%;
+    top: 45px;
     cursor: pointer;
 }
 
 .back:active{
     scale: 0.95;
+}
+
+.fullElem.todo-list-fullpage h1{
+    font-size: 50px;
+    font-family: Aeonik_Bold;
+}
+
+.fullElem.todo-list-fullpage{
+    padding: 35px;
+}
+
+.fullElem.todo-list-fullpage .todo-container{
+    height: 80%;
+    width: 100%;
+    margin-top: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.fullElem.todo-list-fullpage .todo-container .left{
+    height: 100%;
+    width: 33%;
+    background-color: var(--ter2);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    font-family: Aeonik_Light;
+}
+.fullElem.todo-list-fullpage .todo-container .left form{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    height: 100%;
+}
+.fullElem.todo-list-fullpage .todo-container .left form input[type="text"],
+.fullElem.todo-list-fullpage .todo-container .left form textarea,
+.fullElem.todo-list-fullpage .todo-container .left form #add-task{
+    width: 100%;
+}
+
+.fullElem.todo-list-fullpage .todo-container .left form input{
+    font-size: 30px;
+    padding: 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: black;
+    background-color: var(--pri);
+}
+
+.fullElem.todo-list-fullpage .todo-container .left form textarea{
+    font-size: 30px;
+    padding: 20px;
+    height: 330px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: black;
+    background-color: var(--pri);
+}
+
+.fullElem.todo-list-fullpage .todo-container .left form #add-task{
+    font-size: 25px;
+    padding: 12px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white;
+    background-color: var(--ter1);
+    font-weight: 700;
+    transition: all ease 0.2s;
+    font-family: Aeonik_Bold;
+}
+
+.fullElem.todo-list-fullpage .todo-container .left #add-task:active{
+    scale: 0.95;
+}
+
+.fullElem.todo-list-fullpage .todo-container .right{
+    height: 100%;
+    width: 65%;
+    background-color: var(--ter2);
+    border-radius: 20px;
+    padding: 30px;
+    overflow: auto;
+}
+
+.fullElem.todo-list-fullpage .todo-container .right .tasks{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--pri);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+}
+
+.fullElem.todo-list-fullpage .todo-container .right .tasks h5{
+    font-size: 30px;
+    color: black;
+    margin-right: 7px;
+    display: flex;
+    gap: 10px;
+}
+
+.fullElem.todo-list-fullpage .todo-container .right .tasks h5 span{
+    color: var(--pri);
+    background-color: var(--red);
+    height: fit-content;
+    border-radius: 100px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-family: Aeonik_Bold;
+}
+
+.fullElem.todo-list-fullpage .todo-container .right .tasks h5 span.true{
+    opacity: 1;
+}
+
+.fullElem.todo-list-fullpage .todo-container .right .tasks h5 span.false{
+    opacity: 0;
+}
+.fullElem.todo-list-fullpage .todo-container .right .tasks button{
+    color: white;
+    background-color: var(--green);
+    border: none;
+    outline: none;
+    width: 200px;
+    height: 45px;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: 700;
+    font-family: Aeonik_Light;
+    transition: all ease 0.2s;
+}
+
+.fullElem.todo-list-fullpage .todo-container .right .tasks button:active{
+    scale: 0.93;
+}
+
+.fullElem.todo-list-fullpage .todo-container .left form #checkbox{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: fit-content;
+    gap: 40px;
+}
+
+.fullElem.todo-list-fullpage .todo-container .left form #checkbox #check-box{
+    scale: 1.5;
+}
+
+.fullElem.todo-list-fullpage .todo-container .left form #checkbox label{
+    scale: 1.3;
+    font-family: Aeonik_Regular;
 }
