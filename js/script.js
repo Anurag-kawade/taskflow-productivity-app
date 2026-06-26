@@ -1,76 +1,82 @@
-function openFeatures(){
-    let allElem = document.querySelectorAll(".elem");
-    let fullElemPage = document.querySelectorAll(".fullElem");
-    let allBtn = document.querySelectorAll(".back");
+function openFeatures() {
+  let allElem = document.querySelectorAll(".elem");
+  let fullElemPage = document.querySelectorAll(".fullElem");
+  let allBtn = document.querySelectorAll(".back");
 
-    allElem.forEach(function(elem){ 
-        elem.addEventListener("click",function(){
-            fullElemPage[elem.id].style.display = "block";
-        })
-    })
+  allElem.forEach(function (elem) {
+    elem.addEventListener("click", function () {
+      fullElemPage[elem.id].style.display = "block";
+    });
+  });
 
-    allBtn.forEach(function(btn){
-        btn.addEventListener("click",function(){
-            fullElemPage[btn.id].style.display = "none";
-        })
-    })
+  allBtn.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      fullElemPage[btn.id].style.display = "none";
+    });
+  });
 }
 
 openFeatures();
 
+function todoList() {
+  let form = document.querySelector("#form");
+  let taskInput = document.querySelector("#form input");
+  let detailsInput = document.querySelector("#form textarea");
+  let checkBox = document.querySelector(
+    ".fullElem.todo-list-fullpage .todo-container .left form #checkbox #check-box",
+  );
 
-let form = document.querySelector("#form");
-let taskInput = document.querySelector("#form input");
-let detailsInput = document.querySelector("#form textarea");
-let checkBox = document.querySelector(".fullElem.todo-list-fullpage .todo-container .left form #checkbox #check-box");
+  var currentTask = [];
 
-let currentTask = [
-    {
-        task : "Mandir Jao",
-        details : "Hanuman Ji Vale",
-        imp : true,
-    },
-    {
-        task : "Recording Karo",
-        details : "Cohort ki",
-        imp : true,
-    },
-    {
-        task : "Khana Khao",
-        details : "2 baje",
-        imp : false,
-    },
-];
+  if (localStorage.getItem("currentTask")) {
+    currentTask = JSON.parse(localStorage.getItem("currentTask"));
+  } else {
+    console.log("task list is empty");
+  }
 
-function renderTask(){
-    let allTask = document.querySelector(".fullElem.todo-list-fullpage .todo-container .right");
+  function renderTask() {
+    let allTask = document.querySelector(
+      ".fullElem.todo-list-fullpage .todo-container .right",
+    );
 
-    let sum = '';
+    let sum = "";
 
-    currentTask.forEach(function(elem){
-        sum += `<div class="tasks">
+    currentTask.forEach(function (elem, idx) {
+      sum += `<div class="tasks">
         <h5>${elem.task} <span class="${elem.imp}">IMP</span></h5>
-        <button>Mark as Completed</button>
-        </div>`
-    })
+        <button id=${idx}>Mark as Completed</button>
+        </div>`;
+    });
 
     allTask.innerHTML = sum;
-}
-renderTask();
 
-form.addEventListener("submit",function(dets){
-    dets.preventDefault();   
-    // console.log(taskInput.value);
-    // console.log(detailsInput.value);
-    // console.log(checkBox.checked);
+    let markCompletedBtn = document.querySelectorAll(".tasks button");
+    markCompletedBtn.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        currentTask.splice(btn.id, 1);
+        renderTask();
+      });
+    });
 
-    currentTask.push({task:taskInput.value,details:detailsInput.value,imp:checkBox.checked});
-    taskInput.value = '';
-    detailsInput.value = '';
-    checkBox.checked = false;
+    localStorage.setItem("currentTask", JSON.stringify(currentTask));
+  }
+  renderTask();
+
+  form.addEventListener("submit", function (dets) {
+    dets.preventDefault();
+
+    currentTask.push({
+      task: taskInput.value,
+      details: detailsInput.value,
+      imp: checkBox.checked,
+    });
 
     renderTask();
-    // console.log(currentTask);
-    
-})
 
+    taskInput.value = "";
+    detailsInput.value = "";
+    checkBox.checked = false;
+  });
+}
+
+todoList();
