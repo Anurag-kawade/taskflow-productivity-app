@@ -80,3 +80,19 @@ function todoList() {
 }
 
 todoList();
+
+var hours = Array.from(
+  { length: 24 },
+  (_, idx) => `${idx + 1}:00 - ${idx + 2}:00`
+);
+
+var wholeDaySum = '';
+
+hours.forEach(function (elem) {
+  wholeDaySum +=  `<div class="day-planner-time">
+            <p>${elem}</p>
+            <input type="text" placeholder="...">
+          </div>`;
+});
+var dayPlanner = document.querySelector(".day-planner");
+dayPlanner.innerHTML = wholeDaySum;
